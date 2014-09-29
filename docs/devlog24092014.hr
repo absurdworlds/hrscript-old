@@ -1,0 +1,70 @@
+module reference_example {
+
+import std::io;
+
+interface IClass {
+	public {
+		prototype func assign(IClass& c);
+		prototype func promote();
+		prototype func demote();
+		prototype func hail();
+	}
+};
+
+class Class (IClass) {
+	public {
+		func assign(IClass& c)
+		{
+			// this will not change type of passed reference
+			mah_friend = c;
+		}
+		
+		func promote()
+		{
+			// but this will
+			mah_friend = &mah_friend;
+		}
+		
+		func demote()
+		{
+			mah_friend = ?mah_friend;
+		}
+		
+		func hail()
+		{
+			stdout.append("HAIL TO ME, MORTALS!");
+		}
+	}
+	
+	public IClass& mah_friend;
+}
+
+entry main
+{
+	Class comrade_general;
+	spawn_underling(comrade_general);
+	comrade_general.mah_friend.hail(); // prints as expected "HAIL TO ME, MORTALS!"
+	comrade_general.demote(); // underling is demoted… and deleted
+	comrade_general.mah_friend.hail(); // error
+	
+	// another example
+	string& str_ref = new string : "heap";
+	string str_val : "local";
+	
+	stdout.append("str_ref: " + str_ref); // "str_ref: heap"
+	stdout.append("str_val: " + str_val); // "str_val: stack"
+	str_ref = str_val;
+	stdout.append("str_ref: " + str_ref); // "str_ref: stack"
+	stdout.append("str_val: " + str_val); // "str_val: stack"
+	*str_ref = "bugoga";
+	stdout.append("str_ref: " + str_ref); // "str_ref: bugoga"
+	stdout.append("str_val: " + str_val); // "str_val: bugoga"
+}
+
+func void spawn_underling(IClass& holder)
+{
+	IClass& underling = new Class;
+	holder.assign(underling); // now comrade_general holds underling
+}
+
+} // module reference_example 

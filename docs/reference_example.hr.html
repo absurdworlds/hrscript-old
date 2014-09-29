@@ -1,0 +1,119 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/1999/REC-html401-19991224/strict.dtd">
+<html>
+<head>
+<META http-equiv=Content-Type content="text/html; charset=UTF-8">
+<title>Exported from Notepad++</title>
+<style type="text/css">
+span {
+	font-family: 'Courier New';
+	font-size: 10pt;
+	color: #000000;
+}
+.sc0 {
+}
+.sc2 {
+	color: #008000;
+}
+.sc4 {
+	font-weight: bold;
+	color: #0000FF;
+}
+.sc5 {
+	font-weight: bold;
+	color: #800080;
+}
+.sc6 {
+	color: #8000FF;
+}
+.sc7 {
+	font-weight: bold;
+	color: #804000;
+}
+.sc12 {
+	font-weight: bold;
+	color: #000040;
+}
+.sc13 {
+	font-weight: bold;
+	color: #000040;
+}
+.sc16 {
+	color: #804040;
+}
+.sc24 {
+}
+</style>
+</head>
+<body>
+<div style="float: left; white-space: pre; line-height: 1; background: #FFFFFF; "><span class="sc5">module</span><span class="sc24"> </span><span class="sc0">reference_example</span><span class="sc24"> </span><span class="sc13">{</span><span class="sc24">
+
+</span><span class="sc5">import</span><span class="sc24"> </span><span class="sc0">std</span><span class="sc12">::</span><span class="sc0">io</span><span class="sc12">;</span><span class="sc24">
+
+</span><span class="sc4">interface</span><span class="sc24"> </span><span class="sc0">IClass</span><span class="sc24"> </span><span class="sc13">{</span><span class="sc24">
+    </span><span class="sc4">public</span><span class="sc24"> </span><span class="sc13">{</span><span class="sc24">
+        </span><span class="sc4">prototype</span><span class="sc24"> </span><span class="sc4">func</span><span class="sc24"> </span><span class="sc0">assign</span><span class="sc12">(</span><span class="sc0">IClass</span><span class="sc12">&amp;</span><span class="sc24"> </span><span class="sc0">c</span><span class="sc12">);</span><span class="sc24">
+        </span><span class="sc4">prototype</span><span class="sc24"> </span><span class="sc4">func</span><span class="sc24"> </span><span class="sc0">promote</span><span class="sc12">();</span><span class="sc24">
+        </span><span class="sc4">prototype</span><span class="sc24"> </span><span class="sc4">func</span><span class="sc24"> </span><span class="sc0">demote</span><span class="sc12">();</span><span class="sc24">
+        </span><span class="sc4">prototype</span><span class="sc24"> </span><span class="sc4">func</span><span class="sc24"> </span><span class="sc0">hail</span><span class="sc12">();</span><span class="sc24">
+    </span><span class="sc13">}</span><span class="sc24">
+</span><span class="sc13">}</span><span class="sc12">;</span><span class="sc24">
+
+</span><span class="sc4">class</span><span class="sc24"> </span><span class="sc0">Class</span><span class="sc24"> </span><span class="sc12">(</span><span class="sc0">IClass</span><span class="sc12">)</span><span class="sc24"> </span><span class="sc13">{</span><span class="sc24">
+    </span><span class="sc4">public</span><span class="sc24"> </span><span class="sc13">{</span><span class="sc24">
+        </span><span class="sc4">func</span><span class="sc24"> </span><span class="sc0">assign</span><span class="sc12">(</span><span class="sc0">IClass</span><span class="sc12">&amp;</span><span class="sc24"> </span><span class="sc0">c</span><span class="sc12">)</span><span class="sc24">
+        </span><span class="sc13">{</span><span class="sc24">
+            </span><span class="sc2">// this will not change type of passed reference
+</span><span class="sc24">            </span><span class="sc0">mah_friend</span><span class="sc24"> </span><span class="sc12">=</span><span class="sc24"> </span><span class="sc0">c</span><span class="sc12">;</span><span class="sc24">
+        </span><span class="sc13">}</span><span class="sc24">
+        
+        </span><span class="sc4">func</span><span class="sc24"> </span><span class="sc0">promote</span><span class="sc12">()</span><span class="sc24">
+        </span><span class="sc13">{</span><span class="sc24">
+            </span><span class="sc2">// but this will
+</span><span class="sc24">            </span><span class="sc0">mah_friend</span><span class="sc24"> </span><span class="sc12">=</span><span class="sc24"> </span><span class="sc12">&amp;</span><span class="sc0">mah_friend</span><span class="sc12">;</span><span class="sc24">
+        </span><span class="sc13">}</span><span class="sc24">
+        
+        </span><span class="sc4">func</span><span class="sc24"> </span><span class="sc0">demote</span><span class="sc12">()</span><span class="sc24">
+        </span><span class="sc13">{</span><span class="sc24">
+            </span><span class="sc0">mah_friend</span><span class="sc24"> </span><span class="sc12">=</span><span class="sc24"> </span><span class="sc0">?mah_friend</span><span class="sc12">;</span><span class="sc24">
+        </span><span class="sc13">}</span><span class="sc24">
+        
+        </span><span class="sc4">func</span><span class="sc24"> </span><span class="sc0">hail</span><span class="sc12">()</span><span class="sc24">
+        </span><span class="sc13">{</span><span class="sc24">
+            </span><span class="sc7">stdout</span><span class="sc12">.</span><span class="sc0">append</span><span class="sc12">(</span><span class="sc16">"HAIL TO ME, MORTALS!"</span><span class="sc12">);</span><span class="sc24">
+        </span><span class="sc13">}</span><span class="sc24">
+    </span><span class="sc13">}</span><span class="sc24">
+    
+    </span><span class="sc4">public</span><span class="sc24"> </span><span class="sc0">IClass</span><span class="sc12">&amp;</span><span class="sc24"> </span><span class="sc0">mah_friend</span><span class="sc12">;</span><span class="sc24">
+</span><span class="sc13">}</span><span class="sc24">
+
+</span><span class="sc5">entry</span><span class="sc24"> </span><span class="sc0">main</span><span class="sc24">
+</span><span class="sc13">{</span><span class="sc24">
+    </span><span class="sc0">Class</span><span class="sc24"> </span><span class="sc0">comrade_general</span><span class="sc12">;</span><span class="sc24">
+    </span><span class="sc0">spawn_underling</span><span class="sc12">(</span><span class="sc0">comrade_general</span><span class="sc12">);</span><span class="sc24">
+    </span><span class="sc0">comrade_general</span><span class="sc12">.</span><span class="sc0">mah_friend</span><span class="sc12">.</span><span class="sc0">hail</span><span class="sc12">();</span><span class="sc24"> </span><span class="sc2">// prints as expected "HAIL TO ME, MORTALS!"
+</span><span class="sc24">    </span><span class="sc0">comrade_general</span><span class="sc12">.</span><span class="sc0">demote</span><span class="sc12">();</span><span class="sc24"> </span><span class="sc2">// underling is demoted… and deleted
+</span><span class="sc24">    </span><span class="sc0">comrade_general</span><span class="sc12">.</span><span class="sc0">mah_friend</span><span class="sc12">.</span><span class="sc0">hail</span><span class="sc12">();</span><span class="sc24"> </span><span class="sc2">// error
+</span><span class="sc24">    
+    </span><span class="sc2">// another example
+</span><span class="sc24">    </span><span class="sc6">string</span><span class="sc12">&amp;</span><span class="sc24"> </span><span class="sc0">str_ref</span><span class="sc24"> </span><span class="sc12">=</span><span class="sc24"> </span><span class="sc4">new</span><span class="sc24"> </span><span class="sc6">string</span><span class="sc24"> </span><span class="sc12">:</span><span class="sc24"> </span><span class="sc16">"heap"</span><span class="sc12">;</span><span class="sc24">
+    </span><span class="sc6">string</span><span class="sc24"> </span><span class="sc0">str_val</span><span class="sc24"> </span><span class="sc12">:</span><span class="sc24"> </span><span class="sc16">"local"</span><span class="sc12">;</span><span class="sc24">
+    
+    </span><span class="sc7">stdout</span><span class="sc12">.</span><span class="sc0">append</span><span class="sc12">(</span><span class="sc16">"str_ref: "</span><span class="sc24"> </span><span class="sc12">+</span><span class="sc24"> </span><span class="sc0">str_ref</span><span class="sc12">);</span><span class="sc24"> </span><span class="sc2">// "str_ref: heap"
+</span><span class="sc24">    </span><span class="sc7">stdout</span><span class="sc12">.</span><span class="sc0">append</span><span class="sc12">(</span><span class="sc16">"str_val: "</span><span class="sc24"> </span><span class="sc12">+</span><span class="sc24"> </span><span class="sc0">str_val</span><span class="sc12">);</span><span class="sc24"> </span><span class="sc2">// "str_val: stack"
+</span><span class="sc24">    </span><span class="sc0">str_ref</span><span class="sc24"> </span><span class="sc12">=</span><span class="sc24"> </span><span class="sc0">str_val</span><span class="sc12">;</span><span class="sc24">
+    </span><span class="sc7">stdout</span><span class="sc12">.</span><span class="sc0">append</span><span class="sc12">(</span><span class="sc16">"str_ref: "</span><span class="sc24"> </span><span class="sc12">+</span><span class="sc24"> </span><span class="sc0">str_ref</span><span class="sc12">);</span><span class="sc24"> </span><span class="sc2">// "str_ref: stack"
+</span><span class="sc24">    </span><span class="sc7">stdout</span><span class="sc12">.</span><span class="sc0">append</span><span class="sc12">(</span><span class="sc16">"str_val: "</span><span class="sc24"> </span><span class="sc12">+</span><span class="sc24"> </span><span class="sc0">str_val</span><span class="sc12">);</span><span class="sc24"> </span><span class="sc2">// "str_val: stack"
+</span><span class="sc24">    </span><span class="sc0">*str_ref</span><span class="sc24"> </span><span class="sc12">=</span><span class="sc24"> </span><span class="sc16">"bugoga"</span><span class="sc12">;</span><span class="sc24">
+    </span><span class="sc7">stdout</span><span class="sc12">.</span><span class="sc0">append</span><span class="sc12">(</span><span class="sc16">"str_ref: "</span><span class="sc24"> </span><span class="sc12">+</span><span class="sc24"> </span><span class="sc0">str_ref</span><span class="sc12">);</span><span class="sc24"> </span><span class="sc2">// "str_ref: bugoga"
+</span><span class="sc24">    </span><span class="sc7">stdout</span><span class="sc12">.</span><span class="sc0">append</span><span class="sc12">(</span><span class="sc16">"str_val: "</span><span class="sc24"> </span><span class="sc12">+</span><span class="sc24"> </span><span class="sc0">str_val</span><span class="sc12">);</span><span class="sc24"> </span><span class="sc2">// "str_val: bugoga"
+</span><span class="sc13">}</span><span class="sc24">
+
+</span><span class="sc4">func</span><span class="sc24"> </span><span class="sc6">void</span><span class="sc24"> </span><span class="sc0">spawn_underling</span><span class="sc12">(</span><span class="sc0">IClass</span><span class="sc12">&amp;</span><span class="sc24"> </span><span class="sc0">holder</span><span class="sc12">)</span><span class="sc24">
+</span><span class="sc13">{</span><span class="sc24">
+    </span><span class="sc0">IClass</span><span class="sc12">&amp;</span><span class="sc24"> </span><span class="sc0">underling</span><span class="sc24"> </span><span class="sc12">=</span><span class="sc24"> </span><span class="sc4">new</span><span class="sc24"> </span><span class="sc0">Class</span><span class="sc12">;</span><span class="sc24">
+    </span><span class="sc0">holder</span><span class="sc12">.</span><span class="sc0">assign</span><span class="sc12">(</span><span class="sc0">underling</span><span class="sc12">);</span><span class="sc24"> </span><span class="sc2">// now comrade_general holds underling
+</span><span class="sc13">}</span><span class="sc24">
+
+</span><span class="sc13">}</span><span class="sc24"> </span><span class="sc2">// module reference_example 
+</span></div></body>
+</html>

@@ -1,0 +1,172 @@
+
+/* langtest.hsm */
+import(othermodule.hsm);
+
+module __test_program
+{
+	// also form include(<filename>); possible
+	include
+	{
+		moduletest.hsc,
+		langtest.hsc
+	}
+	
+	// also form export(<filename>); possible
+	export
+	{
+		moduletest.hsh	
+	}
+}
+
+/* moduletest.hsh */
+
+// by setting «requires» we can tell other libraries, that there is another library which is required
+library module_test requires std_strings
+{
+	export func void TestTheModule();
+}
+
+/* moduletest.hsc */
+
+library module_test
+{
+	func void TestTheModule()
+	{
+		var std_strings::string msg : library.name() + " included";
+		stdout << msg;
+	};
+}
+
+/* langtest.hsc */
+
+// This code is part of a library lang_test
+library lang_test
+{
+	class Useless
+	{
+		constructor(int uselessInt)
+		{
+			uselessInt_ : uselessInt;
+		}
+		
+		operator this -> int
+		{
+			result uselessInt_;
+		}
+		
+		operator ++ this
+		{
+			// just an example, don't do such things!!
+			uselessInt_ --;
+		}
+		
+		operator this ++
+		{
+			uselessInt_ ++;
+		}
+		operator this + const Useless& other -> Useless
+		{
+			result uselessInt_ + other.uselessInt_get();
+		}
+		
+		func int uselessInt_get() const
+		{
+			return uselessInt_;
+		}
+		
+		private
+		{
+			var int uselessInt_;
+		}
+	};
+	
+	class ProgramHub
+	{
+	
+		constructor(int uselessInt)
+		{
+			useless_ : uselessInt;
+		}
+		
+		public
+		{
+			func void BringOnTheMigs()
+			{
+				useless_ ++;
+			}
+			
+			operator this -> string
+			{
+				result useless_.toString();
+			}
+			
+			// also a way of writing
+			operator int (this)
+			{
+				result useless_;
+			}
+		}
+		
+		private
+		{
+			friend func int GetBringons(ProgramHub p);
+			
+			var Useless useless_;
+		}
+	};
+
+	func int GetBringons(ProgramHub p)
+	{
+		return p.useless_;
+	}
+	
+	const bool bad_coder : false;
+	
+	entry func void main ()
+	{
+		persist var bool stop : false;
+		var ProgramHub pub : 0;
+		var int counter : 751;
+		var int counter2 : 0;
+		
+		module_test::TestTheModule();
+		
+		loop
+		{
+			pub.BringOnTheMigs();
+			GetBringons(pub) -> counter;
+			counter2 <<+ GetBringons(pub); 
+			
+			static if bad_coder
+			{
+				counter2 <<+ GetBringons(pub) +>> counter2; //whoops, a bad feature
+			}
+			else
+			{
+				//empty scope, just for demonstration
+			}
+			
+			stdout << counter2;
+			
+			counter2 > counter -> stop;
+			
+			exitwhen(stop);
+		}
+		
+		// still not shure if it is a right way
+		!stop; // equivalent to stop <- !stop;
+		// if result of the operator is unused, it gets passed back to an object
+		stop; //this is an operator too! it just passes the object back to itself
+		// *but* the compiler will optimize this by disregarding it
+		
+		loop
+		{
+			exitwhen(stop);
+			stdout << stop;
+			exitwhen(counter ++ > 1000);
+			stdout << pub;
+			exitwhen(counter2 -- < 5);
+		}
+	};
+
+}

@@ -1,0 +1,57 @@
+// I decided to make few changes, hrscript is getting closer to it's final form
+
+module reference_example {
+
+import std::io;
+
+class Class {
+	public {
+		func assign(Class& c)
+		{
+			// first change, now &applies to assignee reference, not the variable being assigned
+			&mah_friend = c;
+			// this way, it allows to simplify other operations on references
+		}
+		
+		func promote()
+		{
+			// cleaner syntax for promoting and demoting:
+			&mah_friend;
+			// although &v = v is still valid (there is no reason for it to not to be)
+		}
+		
+		func demote()
+		{
+			?mah_friend;
+		}
+		
+		func hail()
+		{
+			string& str_ref = new string : "heap";
+			string str_val : "local";
+			string str_val2 : "bugoga";
+			
+			stdout.append("str_ref: " + str_ref); // "str_ref: heap"
+			stdout.append("str_val: " + str_val); // "str_val: local"
+			&str_ref = str_val;
+			stdout.append("str_ref: " + str_ref); // "str_ref: local"
+			stdout.append("str_val: " + str_val); // "str_val: local"
+			
+			// also, it siplifies copying syntax,
+			// it looks identical to that of C++
+			str_ref = str_val2;
+			stdout.append("str_ref: " + str_ref); // "str_ref: bugoga"
+			stdout.append("str_val: " + str_val); // "str_val: bugoga"
+		}
+	}
+	
+	public Class& mah_friend;
+}
+
+entry main
+{
+	Class cl;
+	cl.hail;
+}
+
+} // module reference_example 
