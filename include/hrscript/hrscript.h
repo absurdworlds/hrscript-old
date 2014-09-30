@@ -39,20 +39,25 @@ typedef enum hrsOpcode {
 	hrsOP_Xor   = 0104,		// 001 000 100
 	hrsOP_Not   = 0106,		// 001 000 110
 	
-	hrsOP_NEq   = 0100,		// 001 001 000
-	hrsOP_Eq    = 0112,		// 001 001 010
-	hrsOP_Leq   = 0114,		// 001 001 100
-	hrsOP_Ls    = 0116,		// 001 001 110
-	hrsOP_LAnd  = 0120,		// 001 010 000
-	hrsOP_LOr   = 0122,		// 001 010 010
-	hrsOP_LNot  = 0126,		// 001 010 110
-	
-	hrsOP_Bt    = 0130,		// 001 011 000
-	hrsOP_Bf    = 0132,		// 001 011 010
+	hrsOP_ShR   = 0110,		// 001 001 000
+	hrsOP_ShL   = 0112,		// 001 001 010
+	hrsOP_RoR   = 0114,		// 001 001 100
+	hrsOP_RoL   = 0116,		// 001 001 110
 	
 	hrsOP_Jmp   = 0140,		// 001 100 000
 	hrsOP_Call  = 0141,		// 001 100 001
 	hrsOP_Retn  = 0142,		// 001 100 010
+	
+	hrsOP_NEq   = 0150,		// 001 101 000
+	hrsOP_Eq    = 0152,		// 001 101 010
+	hrsOP_Leq   = 0154,		// 001 101 100
+	hrsOP_Ls    = 0156,		// 001 101 110
+	hrsOP_LAnd  = 0160,		// 001 110 000
+	hrsOP_LOr   = 0162,		// 001 110 010
+	hrsOP_LNot  = 0166,		// 001 110 110
+	
+	hrsOP_Bt    = 0170,		// 001 111 000
+	hrsOP_Bf    = 0172,		// 001 111 010
 	
 	hrsOP_fLoad   = 0402,		// 100 000 010 
 	hrsOP_fStore  = 0404,		// 100 000 100
