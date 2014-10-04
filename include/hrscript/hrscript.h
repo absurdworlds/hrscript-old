@@ -107,6 +107,26 @@ typedef enum hrsOpcode {
 	hrsOP_dvMove   = 0x2101,	/* 10 1000 0000 0010 */
 } hrsOpcode;
 
+#if 0
+typedef enum hrsCallConv {
+	hrsCALL_Register,
+	hrsCALL_Stack,
+};
+#endif
+
+HRSCRIPT hrsContext hrsCreateContext();
+HRSCRIPT void       hrsDestroyContext(hrsContext* hrs);
+
+HRSCRIPT i32        hrsLoadProgram(hrsContext* hrs, hrsProgram* program);
+
+typedef u32 (*)(hrsContext*) hrsFuncId;
+
+
+HRSCRIPT hrsFuncId hrsGetFuncId(hrsContext* hrs);
+HRSCRIPT hrsFuncId hrsRegisterFunction(hrsContext* hrs, u8 const* name,
+	hrsFunction func);
+HRSCRIPT u32       hrsCall(hrsContext* hrs, hrsFuncId func);
+
 #ifdef __cplusplus
 } /* extern "C" */
 #endif
