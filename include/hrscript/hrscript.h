@@ -20,7 +20,8 @@ typedef enum hrsOpcode {
 
 	hrsOP_Load    = 0004,		/* 000 000 100 */
 	hrsOP_Store   = 0005,		/* 000 000 101 */
-	hrsOP_Sttop   = 0006,		/* 000 000 110 */
+	hrsOP_Stack   = 0006,		/* 000 000 110 */
+	hrsOP_Sptr    = 0007,		/* 000 000 111 */
 
 	hrsOP_Add   = 0020,		/* 000 010 000 */
 	hrsOP_Add_i = 0021,		/* 000 010 001 */
@@ -105,7 +106,6 @@ typedef enum hrsOpcode {
 	hrsOP_dvStore  = 0x2101,	/* 10 1000 0000 0001 */
 	hrsOP_dvMove   = 0x2101,	/* 10 1000 0000 0010 */
 } hrsOpcode;
-
 
 #ifdef __cplusplus
 } /* extern "C" */
